@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>China Lens — A-share data inside TradingView (early access)</title>
-  <meta name="description" content="See mainland China data — northbound flow, supplier prices, earnings highlights — without leaving your TradingView chart. Free Chrome extension. Coming soon." />
-  <meta property="og:title" content="China Lens — A-share data inside TradingView" />
-  <meta property="og:description" content="See mainland China data inside your TradingView chart. Free Chrome extension. Early access." />
+  <title>China Lens — Cross-listing context for Chinese ADRs</title>
+  <meta name="description" content="See the Hong Kong shadow price behind Chinese ADRs like BABA, JD, NIO, and BIDU while browsing TradingView or Yahoo Finance." />
+  <meta property="og:title" content="China Lens — Cross-listing context for Chinese ADRs" />
+  <meta property="og:description" content="See HK shadow prices, ADR premium/discount, and China market context without switching tabs." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,10 @@
     html, body { margin: 0; padding: 0; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #f5f4f1;
-      color: #1a1a1a;
+      background:
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 32rem),
+        linear-gradient(135deg, #f8fafc 0%, #eef2f7 48%, #f7f8fb 100%);
+      color: #121417;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -28,24 +30,144 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 64px 24px;
+      padding: 56px 24px 40px;
     }
-    .card { max-width: 640px; width: 100%; text-align: center; }
-    h1 {
-      font-size: clamp(28px, 5vw, 44px);
-      font-weight: 500;
-      letter-spacing: 0.18em;
+    .card { max-width: 920px; width: 100%; text-align: center; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      margin-bottom: 22px;
+      border: 1px solid #d8e1ee;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #42526b;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin: 0 0 28px;
-      line-height: 1.25;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #16a34a;
+      box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.12);
+    }
+    h1 {
+      font-size: clamp(38px, 7vw, 76px);
+      font-weight: 650;
+      letter-spacing: 0;
+      margin: 0 auto 22px;
+      line-height: 0.98;
+      max-width: 840px;
     }
     .lede {
-      font-size: clamp(15px, 1.8vw, 17px);
-      line-height: 1.7;
-      color: #555;
-      margin: 0 auto 40px;
-      max-width: 520px;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.6;
+      color: #475569;
+      margin: 0 auto 34px;
+      max-width: 680px;
       font-weight: 400;
+    }
+    .preview {
+      max-width: 760px;
+      margin: 0 auto 34px;
+      border: 1px solid #dce4ef;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+      text-align: left;
+    }
+    .preview-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 16px;
+      border-bottom: 1px solid #edf1f6;
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+    .dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+    .preview-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #edf1f6;
+    }
+    .panel {
+      background: #fff;
+      padding: 20px;
+    }
+    .panel-label {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .ticker-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .ticker {
+      font-size: 28px;
+      font-weight: 700;
+      color: #111827;
+    }
+    .price {
+      font-size: 18px;
+      font-weight: 650;
+      color: #111827;
+    }
+    .muted {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .positive { color: #0f8a4b; }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .metric {
+      padding: 12px;
+      border: 1px solid #e6ebf2;
+      border-radius: 10px;
+      background: #f8fafc;
+    }
+    .metric span {
+      display: block;
+      color: #64748b;
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: 0.06em;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+    .metric strong {
+      display: block;
+      color: #111827;
+      font-size: 16px;
     }
     form {
       display: flex;
@@ -60,20 +182,20 @@
       min-width: 240px;
       padding: 14px 22px;
       border-radius: 999px;
-      border: 1px solid #d8d4cc;
+      border: 1px solid #cbd5e1;
       background: #fff;
       font-size: 15px;
       font-family: inherit;
-      color: #1a1a1a;
+      color: #121417;
       outline: none;
       transition: border-color 0.15s ease;
     }
-    input[type=email]:focus { border-color: #1a1a1a; }
+    input[type=email]:focus { border-color: #121417; }
     button {
       padding: 14px 30px;
       border-radius: 999px;
       border: none;
-      background: #1a1a1a;
+      background: #121417;
       color: #fff;
       font-size: 13px;
       font-weight: 600;
@@ -83,28 +205,28 @@
       cursor: pointer;
       transition: background 0.15s ease;
     }
-    button:hover { background: #333; }
+    button:hover { background: #2b3340; }
     button:disabled { opacity: 0.5; cursor: wait; }
     .small {
       font-size: 13px;
-      color: #888;
+      color: #64748b;
       margin-top: 8px;
     }
     .features {
       margin-top: 56px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
+      gap: 14px;
       text-align: left;
-      max-width: 720px;
+      max-width: 920px;
       margin-left: auto;
       margin-right: auto;
     }
     .feature {
       padding: 20px;
-      border: 1px solid #e8e5dd;
-      border-radius: 12px;
-      background: #fafaf7;
+      border: 1px solid #dce4ef;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.72);
     }
     .feature h3 {
       font-size: 14px;
@@ -114,7 +236,7 @@
     }
     .feature p {
       font-size: 13px;
-      color: #666;
+      color: #526174;
       margin: 0;
       line-height: 1.55;
     }
@@ -122,26 +244,75 @@
       text-align: center;
       padding: 32px 24px;
       font-size: 12px;
-      color: #999;
+      color: #748095;
     }
     .ok { color: #1a7f37; }
     .err { color: #b32; }
+    @media (max-width: 720px) {
+      main { padding: 40px 16px 28px; }
+      .preview-body { grid-template-columns: 1fr; }
+      .ticker { font-size: 24px; }
+    }
     @media (max-width: 480px) {
-      h1 { letter-spacing: 0.12em; }
+      h1 { font-size: 38px; }
       form { flex-direction: column; }
       button { width: 100%; }
+      .metric-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <main>
     <div class="card">
-      <h1>China Lens<br>for TradingView</h1>
+      <div class="eyebrow">Private beta waitlist</div>
+      <h1>China Lens for Chinese ADRs</h1>
       <p class="lede">
-        Trade BABA, PDD, NIO smarter. See mainland China data —
-        northbound flow, supplier prices, earnings highlights —
-        without leaving your TradingView chart.
+        See the Hong Kong shadow price behind BABA, JD, NIO, and BIDU
+        while browsing TradingView or Yahoo Finance.
       </p>
+
+      <div class="preview" aria-label="China Lens side panel preview">
+        <div class="preview-bar">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div>China Lens side panel</div>
+        </div>
+        <div class="preview-body">
+          <div class="panel">
+            <div class="panel-label">Current ADR</div>
+            <div class="ticker-row">
+              <div>
+                <div class="ticker">BABA</div>
+                <div class="muted">Alibaba Group · NYSE</div>
+              </div>
+              <div class="price">$85.03</div>
+            </div>
+            <div class="metric-grid">
+              <div class="metric">
+                <span>Linked HK</span>
+                <strong>9988.HK</strong>
+              </div>
+              <div class="metric">
+                <span>Ratio</span>
+                <strong>1 ADR = 8 HK</strong>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-label">Cross-listing</div>
+            <div class="ticker-row">
+              <div>
+                <div class="ticker">HK$82.40</div>
+                <div class="muted">Implied ADR: $84.12</div>
+              </div>
+              <div class="price positive">+1.08%</div>
+            </div>
+            <div class="muted">
+              ADR premium calculated from HK price, ADR ratio, and USD/HKD.
+              China context appears when a direct listing or sector proxy exists.
+            </div>
+          </div>
+        </div>
+      </div>
 
       <form id="waitlist" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="6a63aa38-1ef5-4e57-8790-8ad69dac1609" />
@@ -151,31 +322,31 @@
         <input type="email" name="email" placeholder="Your email" required />
         <button type="submit">Get Early Access</button>
       </form>
-      <p class="small" id="status">Free Chrome extension. Coming in 4 weeks. First 100 get lifetime Pro.</p>
+      <p class="small" id="status">Free private beta. First users help shape the ticker list.</p>
 
       <div class="features">
         <div class="feature">
-          <h3>Northbound capital flow</h3>
-          <p>See where mainland smart money is buying — right next to your ADR chart.</p>
+          <h3>HK shadow price</h3>
+          <p>Map ADRs like BABA, JD, and NIO to their Hong Kong listings automatically.</p>
         </div>
         <div class="feature">
-          <h3>Dual-listed quotes</h3>
-          <p>BABA → 9988.HK, JD → 9618.HK. Auto-linked, no tab switching.</p>
+          <h3>Premium / discount</h3>
+          <p>Compare the ADR price with its HK-implied value using ratio and FX.</p>
         </div>
         <div class="feature">
-          <h3>AI earnings summary</h3>
-          <p>Latest earnings call, translated and condensed to 3 bullets.</p>
+          <h3>Smart listing map</h3>
+          <p>Handle direct HK listings, A-share links, and proxy-only names like PDD cleanly.</p>
         </div>
         <div class="feature">
-          <h3>Filing alerts</h3>
-          <p>CSRC, HKEX, SEC 8-K — translated and pushed when they matter.</p>
+          <h3>China context</h3>
+          <p>Show southbound, northbound, or sector context only when it actually fits.</p>
         </div>
       </div>
     </div>
   </main>
 
   <footer>
-    A side project by an indie developer. No spam, no resale, just one launch email.
+    Built by an indie developer. No spam, no resale, just beta updates and one launch email.
   </footer>
 
   <script>

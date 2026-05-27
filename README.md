@@ -6,13 +6,13 @@ Landing page for the China Lens Chrome extension.
 
 ## What this is
 
-A waitlist page to validate demand for a Chrome extension that surfaces mainland China data (A-share quotes, northbound capital flow, AI-translated earnings, regulator filings) inside TradingView and Yahoo Finance.
+A waitlist page to validate demand for a Chrome extension that shows cross-listing context for Chinese ADRs: Hong Kong shadow prices, ADR premium/discount, ticker mapping, and China market context inside TradingView and Yahoo Finance.
 
 ## To collect emails
 
-1. Sign up at [formspree.io](https://formspree.io) (free tier: 50 submissions/month).
-2. Create a new form; copy the endpoint URL (looks like `https://formspree.io/f/xxxxx`).
-3. In `index.html`, replace `REPLACE_WITH_FORMSPREE_ID` with the form ID.
+1. Sign up at [Web3Forms](https://web3forms.com/).
+2. Create a form and copy the access key.
+3. In `index.html`, replace the hidden `access_key` value.
 4. Commit and push.
 
 ## Local preview
