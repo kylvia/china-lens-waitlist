@@ -143,9 +143,12 @@
         without leaving your TradingView chart.
       </p>
 
-      <form id="waitlist" action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID" method="POST">
+      <form id="waitlist" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="6a63aa38-1ef5-4e57-8790-8ad69dac1609" />
+        <input type="hidden" name="subject" value="New China Lens waitlist signup" />
+        <input type="hidden" name="from_name" value="China Lens Waitlist" />
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
         <input type="email" name="email" placeholder="Your email" required />
-        <input type="hidden" name="_subject" value="New China Lens waitlist signup" />
         <button type="submit">Get Early Access</button>
       </form>
       <p class="small" id="status">Free Chrome extension. Coming in 4 weeks. First 100 get lifetime Pro.</p>
