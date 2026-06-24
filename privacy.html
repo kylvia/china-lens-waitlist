@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>China Lens — Privacy Policy</title>
+    <style>
+      body {
+        max-width: 720px;
+        margin: 3rem auto;
+        padding: 0 1.25rem;
+        font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #1a1a1a;
+      }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.15rem; margin-top: 2rem; }
+      code { background: #f3f3f3; padding: 0.1em 0.35em; border-radius: 4px; }
+      .updated { color: #666; font-size: 0.9rem; }
+      ul { padding-left: 1.25rem; }
+      footer { margin-top: 2.5rem; color: #666; font-size: 0.9rem; }
+    </style>
+  </head>
+  <body>
+    <h1>China Lens — Privacy Policy</h1>
+    <p class="updated">Last updated: June 22, 2026</p>
+
+    <p>
+      China Lens is a Chrome extension that shows the corresponding Hong Kong /
+      mainland China stock data for Chinese ADRs you are viewing on TradingView
+      or Yahoo Finance. This policy explains exactly what the extension does and
+      does not do with data.
+    </p>
+
+    <h2>What the extension reads</h2>
+    <p>
+      When you view a stock on <strong>TradingView</strong> or
+      <strong>Yahoo Finance</strong>, China Lens reads the
+      <strong>ticker symbol</strong> of the stock on the current page (from the
+      page URL, or as a fallback from a stable element on the page). This is the
+      only information it reads from the page, and only on those two sites.
+    </p>
+
+    <h2>Where that ticker is sent</h2>
+    <p>
+      To look up public market data, the ticker symbol is sent to the following
+      third-party data providers:
+    </p>
+    <ul>
+      <li><code>qt.gtimg.cn</code> (Tencent) — Hong Kong stock quotes</li>
+      <li><code>push2.eastmoney.com</code> (Eastmoney) — A-share quotes and northbound/southbound fund-flow figures</li>
+      <li><code>api.frankfurter.dev</code> (Frankfurter / ECB) — USD→HKD exchange rate</li>
+    </ul>
+    <p>
+      Only the public ticker symbol and standard request metadata are sent. No
+      account, identity, or personal information is attached to these requests.
+    </p>
+
+    <h2>What we do NOT collect</h2>
+    <ul>
+      <li>No personally identifiable information (name, email, account).</li>
+      <li>No browsing history. The extension only activates on TradingView and Yahoo Finance pages.</li>
+      <li>No cookies, login state, or session tokens.</li>
+      <li>No financial or trading account information — all displayed prices are public market data.</li>
+      <li>No analytics, tracking, advertising, or third-party trackers.</li>
+    </ul>
+
+    <h2>Local storage</h2>
+    <p>
+      China Lens stores a small amount of data locally in your browser using
+      <code>chrome.storage.session</code>: a cache of ticker mappings and the
+      most recent view model for open tabs. This data lives only in your browser,
+      is never transmitted to us, and is cleared when you close the browser.
+    </p>
+
+    <h2>Data sharing &amp; sale</h2>
+    <p>
+      We do not collect, store on any server, share, or sell any user data. The
+      extension has no backend server of its own.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      If this policy changes, the updated version will be posted at this URL with
+      a new "Last updated" date.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy:
+      <a href="mailto:kayla.payten1@gmail.com">kayla.payten1@gmail.com</a>
+    </p>
+
+    <footer>China Lens is a free, open tool. It is not affiliated with TradingView, Yahoo Finance, Tencent, Eastmoney, or the ECB.</footer>
+  </body>
+</html>
